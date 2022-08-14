@@ -6,54 +6,69 @@ const UserController= require("../controllers/userController")
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
-let players =
-   [
-       {
-           "name": "manish",
-           "dob": "1/1/1995",
-           "gender": "male",
-           "city": "jalandhar",
-           "sports": [
-               "swimming"
-           ]
-       },
-       {
-           "name": "gopal",
-           "dob": "1/09/1995",
-           "gender": "male",
-           "city": "delhi",
-           "sports": [
-               "soccer"
-           ],
-       },
-       {
-           "name": "lokesh",
-           "dob": "1/1/1990",
-           "gender": "male",
-           "city": "mumbai",
-           "sports": [
-               "soccer"
-           ],
-       },
-   ]
-   
-// Write a POST /players api that creates a new player 
-// ( i.e. that saves a player’s details and doesn’t allow saving the data
-//  of a player with a name that already exists in the data)
+// voting assignment
+let person =[
+    {
+        name:"pk",
+        age:10,
+        votingStatus:false
 
-   router.post('/players', function (req, res) {
+    },
+    {
+        name:"SK",
+        age:20,
+        votingStatus:false
 
-    //LOGIC WILL COME HERE
-    let addNewArray = req.body
-    let newPlayerName = req.body.name
-    for(let i=0;i<players.length;i++){
-        if(players[i].name == newPlayerName){
-            return res.send("does not allowed same name data")
+    },
+    {
+        name:"AA",
+        age:70,
+        votingStatus:false
+    },
+    {
+        name:"SC",
+        age:5,
+        votingStatus:false
+    },
+    {
+        name:"HO",
+        age:40,
+        votingStatus:false
+    }
+]
+
+router.post("/checkVotingStatus",function(req,res){
+    let votingAge = req.query.age
+    let voteAblePerson =[]
+    for(let i=0;i<person.length;i++){
+        if(person[i].age >=votingAge){
+            person[i].votingStatus=true
+            voteAblePerson.push(person[i])
+
         }
     }
-    let myValue = players.push(addNewArray)
-    res.send(players)
+     res.send({person:voteAblePerson,status:true})
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// router.post("/checkVotingStatus",function(req,res){
+//     let votingAge = req.query.age
+//     let myValue = person.filter(item => item.age > votingAge ? item.votingStatus = true :null)
+//     res.send(myValue)
+// })
 
 
 
